@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/fabianmaurer/Blockchain19#readme",
   "dependencies": {
+    "@iota/core": "^1.0.0-beta.8",
     "ejs": "^2.6.1",
     "express": "^4.16.4",
     "socket.io": "^2.2.0"
