@@ -1,0 +1,24 @@
+{
+  "name": "blockchainhackathon19",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fabianmaurer/Blockchain19.git"
+  },
+  "author": "Fabian Maurer",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fabianmaurer/Blockchain19/issues"
+  },
+  "homepage": "https://github.com/fabianmaurer/Blockchain19#readme",
+  "dependencies": {
+    "ejs": "^2.6.1",
+    "express": "^4.16.4",
+    "socket.io": "^2.2.0"
+  }
+}
