@@ -1,0 +1,21 @@
+{
+  "name": "hack",
+  "version": "1.0.0",
+  "description": "",
+  "main": "CUBE_MAGIC.js",
+  "dependencies": {
+    "gpio": "^0.2.10",
+    "iota.lib.js": "^0.5.1",
+    "johnny-five": "^1.0.0",
+    "onoff": "^3.2.6",
+    "pi-gpio": "0.0.8",
+    "raspi-io": "^9.0.1",
+    "rpi-gpio": "^2.1.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}

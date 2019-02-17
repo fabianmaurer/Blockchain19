@@ -20950,8 +20950,6 @@ function getLastTransaction(seed) {
         if (error) {
             console.log(error)
         } else {
-            console.log('success')
-            console.log(success)
             transactions = success;
             checkForBreaches();
         }
@@ -20962,6 +20960,7 @@ function checkForBreaches() {
     // let change=false;
     // console.log(iota.utils.fromTrytes(transactions[0].signatureMessageFragment.slice(0, transactions[0].signatureMessageFragment.length - 1)))
     // console.log(latestNumber)
+    console.log(latestNumber)
     if (latestNumber == 0) {
         for (let t of transactions) {
             let data = iota.utils.fromTrytes(t.signatureMessageFragment.slice(0, t.signatureMessageFragment.length - 1));
@@ -20978,11 +20977,11 @@ function checkForBreaches() {
             let data = iota.utils.fromTrytes(t.signatureMessageFragment.slice(0, t.signatureMessageFragment.length - 1));
             // console.log(data);
             if (data.includes('#')) {
-                let string1=data.split('#')[1];
-                let numberString=string1.split(' ')[0];
-                
+                let string1 = data.split('#')[1];
+                let numberString = string1.split(' ')[0];
+
                 let number = parseInt(numberString);
-                console.log(number+'/'+latestNumber)
+
                 if (number > latestNumber) {
                     console.log('1')
                     let time = data.split('Time: ')[1].slice(0, 8);
@@ -20993,7 +20992,8 @@ function checkForBreaches() {
                         type: 'motion',
                         time: time + ' 02/17/2019'
                     });
-                    loadTimeline();
+                    //loadTimeline();
+                    incrementTimeline();
                     loadMenu();
                 }
             }
@@ -21026,7 +21026,7 @@ function checkForBreaches() {
 function cycle() {
     let seed = 'JHZTLEVXLOJRMEECBBW9GGVH9UBNOYDFHWUXJNEAEBKLUNUKFAAPBAESRIGRWZBBTANZEOZNYJBPVALXBWZIULCLNA';
     getLastTransaction(seed);
-    setTimeout(cycle, 200);
+    setTimeout(cycle, 1000);
 }
 
 let dummyTimelines = [
@@ -21223,6 +21223,74 @@ function loadDummyData() {
             return;
         }
     }
+}
+
+// $('#bitconnect').click(function(){
+//     incrementTimeline();
+// })
+
+function incrementTimeline() {
+    let $t = $('#cube-monitor-timeline');
+    let $separator = $(document.createElement('div'));
+    $separator.attr('class', 'timeline-separator');
+    $t.prepend($separator);
+    let entry = selectedTimeline.timeline[selectedTimeline.timeline.length-1];
+    let $entry = $(document.createElement('div'));
+    $entry.attr('class', 'timeline-entry timeline-entry-' + entry.category);
+    $entry.css('height','0');
+    $entry.animate({'height':'39px'},500);
+    $separator.css('height','0');
+    $separator.animate({'height':'20px'},500);
+    
+    let $head = $(document.createElement('div'));
+    $head.attr('class', 'timeline-heading');
+    $entry.append($head);
+    let $icon = $(document.createElement('div'));
+    $icon.attr('class', 'timeline-entry-icon');
+    $icon.append('<i class="' + icons[entry.type] + '"></i>');
+    $head.append($icon);
+    let $summary = $(document.createElement('div'));
+    $summary.attr('class', 'timeline-entry-summary');
+    $summary.html(summaryTexts[entry.type]);
+    $head.append($summary);
+    let $date = $(document.createElement('div'));
+    $date.attr('class', 'timeline-entry-time');
+    $date.html(entry.time);
+    $head.append($date);
+    $t.prepend($entry);
+    if (entry.category == 'breach') {
+        $entry.addClass('collapsed');
+        $head.css('cursor', 'pointer')
+        let $content = $(document.createElement('div'));
+        $content.attr('class', 'timeline-content');
+        let $line1 = $(document.createElement('div'));
+        $line1.attr('class', 'timeline-entry-line');
+        let $line2 = $(document.createElement('div'));
+        $line2.attr('class', 'timeline-entry-line');
+        let $line3 = $(document.createElement('div'));
+        $line3.attr('class', 'timeline-entry-line');
+        let $line4 = $(document.createElement('div'));
+        $line4.attr('class', 'timeline-entry-line');
+        let $line5 = $(document.createElement('div'));
+        $line5.attr('class', 'timeline-entry-line');
+        $line1.html('Threshold: ' + entry.threshold + '' + entry.unit);
+        $line2.html('Measured peak value: ' + entry.measuredPeak + '' + entry.unit);
+        $line3.html('Measured average value: ' + entry.measuredAvg + entry.unit);
+        $line4.html('Timestamp: ' + entry.timestamp);
+        $line5.html('Duration: ' + entry.duration);
+        $content.append($line1);
+        $content.append($line2);
+        $content.append($line3);
+        $content.append($line4);
+        $content.append($line5);
+        $entry.append($content);
+        $head.click(function () {
+            $entry.toggleClass('collapsed');
+
+        })
+    }
+
+
 }
 
 function loadTimeline() {
