@@ -20,6 +20,8 @@
     "@iota/core": "^1.0.0-beta.8",
     "ejs": "^2.6.1",
     "express": "^4.16.4",
+    "iota": "0.0.0",
+    "iota.lib.js": "^0.5.1",
     "socket.io": "^2.2.0"
   }
 }

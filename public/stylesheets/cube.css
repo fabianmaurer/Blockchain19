@@ -176,7 +176,7 @@ body{
 }
 
 .timeline-separator{
-    width:50%;
+    width:37px;
     border-right:1px solid #ccc;
     height:20px;
 }
